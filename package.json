@@ -1,0 +1,21 @@
+{
+  "name": "homebridge-http-loxone-shades",
+  "version": "0.1.0",
+  "description": "Loxone shade status plugin for Homebridge",
+  "keywords": [
+    "homebridge-plugin",
+    "shade status",
+    "loxone"
+  ],
+  "license": "MIT",
+  "author": "Thomas Einwaller <tom@einwaller.net>",
+  "dependencies": {},
+  "engines": {
+    "node": ">=8.0.0",
+    "homebridge": ">=0.4.20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tompson/homebridge-http-loxone-shades.git"
+  }
+}
