@@ -5,10 +5,10 @@ var Service, Characteristic;
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
-    homebridge.registerAccessory("homebridge-http-contact-sensor", "LoxoneShadeStatus", LoxoneShadeStatus);
+    homebridge.registerAccessory("homebridge-http-contact-sensor", "LoxoneShades", LoxoneShades);
 };
 
-function LoxoneShadeStatus(log, config) {
+function LoxoneShades(log, config) {
     this.log = log;
     this.name = config.name;
     this.pollInterval = config.pollInterval;
@@ -31,7 +31,7 @@ function LoxoneShadeStatus(log, config) {
     setTimeout(this.monitorPosition.bind(this), this.pollInterval);
 };
 
-LoxoneShadeStatus.prototype = {
+LoxoneShades.prototype = {
 
     monitorPosition: function () {
         this.getPosition((state) => {
