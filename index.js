@@ -12,8 +12,8 @@ function LoxoneShades(log, config) {
     this.log = log;
     this.name = config.name;
     this.pollInterval = config.pollInterval;
+    this.previousPosition = 100;
     this.position = 100;
-    this.targetPosition = this.position;
 
     this.statusUrl = config.statusUrl || null;
     if (this.statusUrl == null) {
@@ -39,7 +39,8 @@ LoxoneShades.prototype = {
                 this.position = state;
                 this.service.getCharacteristic(Characteristic.CurrentPosition).setValue(this.position);
                 this.service.getCharacteristic(Characteristic.PositionState).setValue(this.calcluationPositionState());
-            }            
+                this.previousPosition = this.position;
+            }
             setTimeout(this.monitorPosition.bind(this), this.pollInterval);
         })
     },
@@ -60,13 +61,13 @@ LoxoneShades.prototype = {
     },
 
     calcluationPositionState: function() {
-        var positionState = 2
-        if (this.targetPosition < this.position) {
-            positionState = 0
-        } else if (this.targetPosition > this.position) {
-            positionState = 1
+        if (this.previousPosition > this.position) {
+            return 0
+        } else if (this.previousPosition < this.position) {
+            return 1
+        } else {
+            return 2;
         }
-        return positionState;
     },
 
     getName: function (callback) {
@@ -88,7 +89,6 @@ LoxoneShades.prototype = {
                 data += chunk;
             });
             resp.on('end', () => {
-                this.targetPosition = state;
                 callback();
             });
         }).on("error", (err) => {

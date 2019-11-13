@@ -1,6 +1,6 @@
 {
   "name": "homebridge-http-loxone-shades",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Loxone shade status plugin for Homebridge",
   "keywords": [
     "homebridge-plugin",
